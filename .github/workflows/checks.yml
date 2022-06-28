@@ -6,7 +6,6 @@ name: Checks
 on:
   push:
     branches:
-      - 'main'
       - 'releases/**'
 
 jobs:
