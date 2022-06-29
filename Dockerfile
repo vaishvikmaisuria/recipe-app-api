@@ -16,18 +16,24 @@ ARG DEV=false
 # one image layer -> single run command (more effcient) 
 # 1. New virtual env to store dependencies for edge cases -> no downsides
 # 2. full path for pip and upgrade pip 
-# 3. install requirements in virtual env
-# 4. remove tmp -> no extra dependencies after creation, docker images are lighweight 
-# 5. adduser -> new user {best practice not use root user} 
-# 6. disable password no password when using container 
-# 7. our username is django-user 
+# 3. install the client package to connect to postgress in the image
+# 4. sets a virtual dependency package, it groups the packages we install into temp-build-deps 
+# 5. install requirements in virtual env
+# 6. remove tmp -> no extra dependencies after creation, docker images are lighweight 
+# 7. adduser -> new user {best practice not use root user} 
+# 8. disable password no password when using container 
+# 9. our username is django-user 
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
+    apk add --update --no-cache postgresql-client jpeg-dev && \
+    apk add --update --no-cache --virtual .tmp-build-deps \
+        build-base postgresql-dev musl-dev zlib zlib-dev linux-headers && \
     /py/bin/pip install -r /tmp/requirements.txt && \
     if [ $DEV = "true" ]; \
          then /py/bin/pip install -r /tmp/requirements.dev.txt ; \
     fi && \
     rm -rf /tmp && \
+    apk del .tmp-build-deps && \
     adduser \
         --disabled-password \
         --no-create-home \
