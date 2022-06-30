@@ -3,7 +3,7 @@ linting:
 testing:
 	docker-compose run --rm app sh -c "python manage.py test"
 build:
-	docker-compose build 
+	docker-compose build
 
 start:
 	docker-compose up
@@ -13,3 +13,9 @@ test:
 
 clear:
 	docker-compose down
+
+migrate:
+	docker-compose run --rm app sh -c "python manage.py makemigrations"
+
+listVol:
+	docker volume ls
