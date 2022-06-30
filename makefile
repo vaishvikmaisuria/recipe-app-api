@@ -19,3 +19,6 @@ migrate:
 
 listVol:
 	docker volume ls
+
+superuser:
+	docker-compose run --rm app sh -c "python manage.py createsuperuser"
