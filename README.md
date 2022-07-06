@@ -30,5 +30,28 @@ Architecture
             4. environment variable configuration
 
     Authentication:
-        Simple Token: Balance of Security and Simplicity
+        Simple Token: Balance of Security and Simplicity (used in the app)
         JWT: Better for more users and more secure need third party library (Future plan)
+
+    APIView vs Viewsets
+        What is view
+            handles a request made url
+            Django uses functions
+            Django rest framework (DRF) uses class
+                reusable logic
+                override behavior
+
+        ApiView and Viewsets = DRF base classes
+
+        APIView is used to create authentication endpoints and are focused around HTTP mathods
+        APIview is useful for non Crud APIs, bespoke logic (e.g. auth, jobs, external apis)
+        Viewsets focused around actions (retrieve, list, update, partial update, destroy)
+        Viewsets for Crud operations on models and use routers tro generate URLS and maps to the Django model.
+
+    Testing Api with Swagger
+        Navigate to http://localhost:8000/api/docs/
+        Use /api/user/create to create user
+        Use /api/user/token to get token for user
+        Go to Authorize and then to "tokenAuth  (apiKey)"
+        type "Token {user_token}" in the value field and authenticate
+        Use and test the endpoint with Swagger
