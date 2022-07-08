@@ -6,17 +6,17 @@ from rest_framework import serializers
 from core.models import (
     Recipe,
     Tag,
-    # Ingredient,
+    Ingredient,
 )
 
 
-# class IngredientSerializer(serializers.ModelSerializer):
-#     """Serializer for ingredients."""
+class IngredientSerializer(serializers.ModelSerializer):
+    """Serializer for ingredients."""
 
-#     class Meta:
-#         model = Ingredient
-#         fields = ['id', 'name']
-#         read_only_fields = ['id']
+    class Meta:
+        model = Ingredient
+        fields = ['id', 'name']
+        read_only_fields = ['id']
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -31,13 +31,13 @@ class TagSerializer(serializers.ModelSerializer):
 class RecipeSerializer(serializers.ModelSerializer):
     """Serializer for recipes."""
     tags = TagSerializer(many=True, required=False)
-    # ingredients = IngredientSerializer(many=True, required=False)
+    ingredients = IngredientSerializer(many=True, required=False)
 
     class Meta:
         model = Recipe
         fields = [
             'id', 'title', 'time_minutes', 'price', 'link', 'tags',
-
+            'ingredients'
         ]
         read_only_fields = ['id']
 
