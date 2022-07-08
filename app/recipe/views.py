@@ -82,6 +82,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         """Create a new recipe."""
         serializer.save(user=self.request.user)
 
+    # Custom endpoint for image API
     @action(methods=['POST'], detail=True, url_path='upload-image')
     def upload_image(self, request, pk=None):
         """Upload an image to recipe."""
