@@ -22,3 +22,6 @@ listVol:
 
 superuser:
 	docker-compose run --rm app sh -c "python manage.py createsuperuser"
+
+down:
+	docker-compose -f docker-compose-deploy.yml down
